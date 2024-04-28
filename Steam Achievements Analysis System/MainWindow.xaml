@@ -1,0 +1,56 @@
+﻿<Window x:Class="Steam_Achievements_Analysis_System.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Steam_Achievements_Analysis_System"
+        mc:Ignorable="d"
+        Title="Steam Achievements Analysis" Height="450" Width="650">
+    <Grid Background="#171a21">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <DataGrid Background="#1b1e24" ItemsSource="{Binding Games}" 
+                  AutoGenerateColumns="False"
+                  Margin="10" 
+                  SelectedItem="{Binding SelectedGame, 
+            Mode=TwoWay}"
+               RowHeight="30">
+            <DataGrid.Resources>
+                <!-- Стиль для ячеек данных -->
+                <Style TargetType="DataGridCell">
+                    <Setter Property="Background" Value="#1b1e24" />
+                    <Setter Property="Foreground" Value="#f5ebe6" />
+                </Style>
+
+                <!-- Стиль для заголовков столбцов -->
+                <Style TargetType="DataGridColumnHeader">
+                    <Setter Property="Background" Value="#1b1e24" />
+                    <Setter Property="Foreground" Value="#c9ada1" />
+                    <Setter Property="BorderBrush" Value="#1b1e24" />
+                    <Setter Property="BorderThickness" Value="0,0,1,1" />
+                    <Setter Property="Margin" Value="5,0,5,0"/>
+                </Style>
+            </DataGrid.Resources>
+            <DataGrid.Columns >
+                <DataGridTextColumn Header="Game ID" Binding="{Binding AppId}" Width="Auto" DisplayIndex="0"/>
+                <DataGridTextColumn Header="Название игры" Binding="{Binding GameName}" Width="*" DisplayIndex="1"/>
+            </DataGrid.Columns>
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="MouseDoubleClick">
+                    <i:InvokeCommandAction Command="{Binding OpenAchievementsCommand}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </DataGrid>
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="10">
+            <Button Content="Загрузить данные" Command="{Binding LoadGamesCommand}" Width="120" Height="30" Margin="0,0,10,0"/>
+            <Button Content="Создать граффик" Command="{Binding GenerateChartCommand}" Width="120" Height="30" Margin="0,0,10,0"/>
+            <Button Content="Сформировать отчет" Command="{Binding GenerateReportCommand}" Margin="0,0,10,0"/>
+            <Button Content="Удалить" Command="{Binding DeleteCommand}" Margin="0,0,10,0"/>
+        </StackPanel>
+    </Grid>
+</Window>

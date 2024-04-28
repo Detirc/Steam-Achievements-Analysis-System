@@ -1,0 +1,54 @@
+﻿<Window x:Class="Steam_Achievements_Analysis_System.View.AchievementsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Steam_Achievements_Analysis_System.YourOutputDirectory"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:converters="clr-namespace:Steam_Achievements_Analysis_System.Converter"
+
+        mc:Ignorable="d"
+        Title="AchievementsWindow" Height="450" Width="800">
+    <Window.Resources>
+        <converters:PercentageConverter x:Key="PercentageConverter" />
+    </Window.Resources>
+
+    <Grid Background="#171a21">
+        <DataGrid Background="#1b1e24" 
+                  ItemsSource="{Binding Achievements}" 
+                  AutoGenerateColumns="False"
+                  Margin="10">
+            <DataGrid.Resources>
+                <!-- Стиль для ячеек данных -->
+                <Style TargetType="DataGridCell">
+                    <Setter Property="Background" Value="#1b1e24" />
+                    <Setter Property="Foreground" Value="#f5ebe6" />
+                </Style>
+
+                <!-- Стиль для заголовков столбцов -->
+                <Style TargetType="DataGridColumnHeader">
+                    <Setter Property="Background" Value="#1b1e24" />
+                    <Setter Property="Foreground" Value="#c9ada1" />
+                    <Setter Property="BorderBrush" Value="#1b1e24" />
+                    <Setter Property="BorderThickness" Value="0,0,1,1" />
+                    <Setter Property="Margin" Value="5,0,5,0"/>
+                </Style>
+            </DataGrid.Resources>
+            <DataGrid.Columns>
+                
+                <DataGridTextColumn Header="Достижение" Binding="{Binding AchivmentName}" Width="Auto"/>
+                <DataGridTextColumn Header="Процент Выполнения" Width="*">
+                    <DataGridTextColumn.Binding>
+                        <Binding Path="AchievementPercentages" Converter="{StaticResource PercentageConverter}" />
+                    </DataGridTextColumn.Binding>
+                </DataGridTextColumn>
+
+            </DataGrid.Columns>
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="MouseDoubleClick">
+                    <i:InvokeCommandAction Command="{Binding OpenBrowserCommand}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </DataGrid>
+    </Grid>
+</Window>

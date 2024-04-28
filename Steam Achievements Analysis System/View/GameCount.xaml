@@ -1,0 +1,24 @@
+﻿<Window x:Class="Steam_Achievements_Analysis_System.View.GameCount"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Steam_Achievements_Analysis_System.View"
+        mc:Ignorable="d"
+        Title="GameCount" Height="200" Width="200">
+    <Grid>
+       
+        
+        <StackPanel Margin="4,4,4,5">
+         <TextBlock Text="Количество Данных"/>
+            <WrapPanel Orientation="Vertical">
+                <TextBox Width="50"/>
+            </WrapPanel>
+            <WrapPanel>
+                <Button Content="OK" Margin="0,0,10,0"/>
+                <Button Content="Отмена"/>
+            </WrapPanel>
+
+        </StackPanel>
+    </Grid>
+</Window>
